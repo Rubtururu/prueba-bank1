@@ -32,19 +32,28 @@ async function updateUI(contract) {
     document.getElementById('lastDividendClaim').textContent = new Date(lastDividendClaim * 1000).toLocaleString();
 }
 
+async function approve() {
+    const contract = new web3.eth.Contract(contractAbi, 'DIRECCION_DEL_CONTRATO_USDT');
+    const amountToApprove = web3.utils.toWei('1000000', 'ether'); // Ajusta según sea necesario
+
+    try {
+        await contract.methods.approve(contractAddress, amountToApprove).send({ from: userAddress });
+        console.log('Aprobación exitosa');
+    } catch (error) {
+        console.error('Error al aprobar:', error);
+    }
+    // Actualizar la interfaz después de la aprobación
+    const updatedContract = new web3.eth.Contract(contractAbi, contractAddress);
+    updateUI(updatedContract);
+}
+
 async function deposit() {
     const depositAmount = document.getElementById('depositAmount').value;
     if (depositAmount > 0) {
         const contract = new web3.eth.Contract(contractAbi, contractAddress);
 
         try {
-            // Asegurar que el contrato tenga la aprobación para transferir USDT
-            await usdtToken.approve(contractAddress, depositAmount);
-
-            // Llamar a la función de depósito
             await contract.methods.deposit(depositAmount).send({ from: userAddress });
-
-            // Actualizar la interfaz después del depósito
             updateUI(contract);
         } catch (error) {
             console.error(error);
