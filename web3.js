@@ -42,10 +42,6 @@ async function updateUI() {
 updateUI();
 
 
-// Conectar a la red Ethereum
-const provider = new ethers.providers.Web3Provider(web3.currentProvider);
-const signer = provider.getSigner();
-
 // Crear la instancia del contrato
 const contract = new ethers.Contract(contractAddress, contractABI, signer);
 
