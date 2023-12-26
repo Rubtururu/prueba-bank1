@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>BancoUSDT Interface</title>
+</head>
+<body>
+    <div class="container">
+        <h1>BancoUSDT Interface</h1>
+        <p>Total Deposits: <span id="totalDeposits"></span></p>
+        <p>Your Deposits: <span id="userDeposits"></span></p>
+        <p>Your Dividends: <span id="userDividends"></span></p>
+        <p>Treasury Pool: <span id="treasuryPool"></span></p>
+        <p>Dividend Pool: <span id="dividendPool"></span></p>
+        <p>Creator Wallet: <span id="creatorWallet"></span></p>
+        <p>Total Depositors: <span id="totalDepositors"></span></p>
+        <button onclick="deposit()">Deposit</button>
+        <button onclick="withdraw()">Withdraw</button>
+        <button onclick="claimDividends()">Claim Dividends</button>
+        <button onclick="withdrawDividends()">Withdraw Dividends</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.0.0/dist/ethers.min.js"></script>
+    <script src="web3.js"></script>
+</body>
+</html>
