@@ -42,9 +42,6 @@ async function updateUI() {
 updateUI();
 
 
-// Crear la instancia del contrato
-const contract = new ethers.Contract(contractAddress, contractABI, signer);
-
 // Actualiza la dirección del usuario
 const userAddress = 'DIRECCION_USUARIO';
 
