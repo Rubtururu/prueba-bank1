@@ -4,16 +4,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     let userAddress;
 
     // Conectar con MetaMask u otro proveedor web3
-    if (window.ethereum) {
+     if (window.ethereum) {
         window.web3 = new Web3(ethereum);
         try {
-            // Solicitar acceso a la cuenta de usuario
             await ethereum.enable();
             const accounts = await web3.eth.getAccounts();
             userAddress = accounts[0];
             document.getElementById('userAddress').textContent = userAddress;
 
-            // Inicializar el contrato
             const contract = new web3.eth.Contract(contractAbi, contractAddress);
             updateUI(contract);
         } catch (error) {
@@ -40,7 +38,13 @@ async function deposit() {
         const contract = new web3.eth.Contract(contractAbi, contractAddress);
 
         try {
+            // Asegurar que el contrato tenga la aprobación para transferir USDT
+            await usdtToken.approve(contractAddress, depositAmount);
+
+            // Llamar a la función de depósito
             await contract.methods.deposit(depositAmount).send({ from: userAddress });
+
+            // Actualizar la interfaz después del depósito
             updateUI(contract);
         } catch (error) {
             console.error(error);
